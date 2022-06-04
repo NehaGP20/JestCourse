@@ -1,0 +1,39 @@
+Steps to configure JEST in Angular project
+
+Step 1: Uninstall all karma jasmine packages
+        Remove all the karma and jasmine related packages using npm command
+        npm uninstall @types/jasmine jasmine-core karma karma-chrome-launcher karma-coverage karma-jasmine karma-jasmine-html-reporter
+Step 2: Remove test obejct from Angular.json 
+Step 3: Delete karma.conf.js file and test.ts file
+Step 4: npm i jest @types/jest jest-preset-angular
+Step 5: Create setup.jest.ts file => inside src 
+Step 6: Update tsconfig.spec.json file
+        "types": [
+             "jest",
+             "node"
+        ]
+        Inside files => "src/setup.jest.ts",
+Step 7: Add jest configuartion in package.json
+
+"jest": {
+    "preset": "jest-preset-angular",
+    "setupFilesAfterEnv": [
+      "<rootDir>/src/setup.jest.ts"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/node_modules/",
+      "<rootDir>/dist/"
+    ],
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "<rootDir>/tsconfig.spec.json",
+        "stringifyContentPathRegex": "\\.html$" 
+      }
+    }
+  }
+
+Step 8: Add scripts in package.json to run JEST
+
+"test": "jest",
+"test:watch": "jest --watch",
+"test:coverage": "jest --coverage"
